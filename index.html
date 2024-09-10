@@ -86,10 +86,10 @@
       .my-video {
         margin-bottom: 65px;
       }
-      /* .video-full {
+      .video-full {
         height: 100dvh;
         width: 100%;
-      } */
+      }
       .section_brands {
         box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.13);
         margin-bottom: 5px;
@@ -403,16 +403,20 @@
                 id="my-video"
                 class="video-js vjs-big-play-centered"
                 controls
+                loading="lazy"
+                muted
+                playsinline
                 preload="auto"
                 data-setup="{}"
               >
                 <source
-                  src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+                  src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
                   type="application/x-mpegURL"
                 />
                 <!-- <source src="./AU-beast-runs.mp4" type="video/mp4" /> -->
                 Ваш браузер не поддерживает HTML5 видео.
               </video>
+
               <canvas id="canvas" style="display: none"></canvas>
             </div>
           </div>
@@ -681,6 +685,7 @@
     </div>
 
     <script src="./assets/js/video-js/video-js.min.js"></script>
+    <script src="https://vjs.zencdn.net/7.20.3/videojs-http-streaming.min.js"></script>
     <script src="./assets/js/video-js/custom-video-js.js"></script>
 
     <script>

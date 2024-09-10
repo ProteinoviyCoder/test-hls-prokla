@@ -2,6 +2,16 @@ const player = videojs("my-video", {
   userActions: {
     doubleClick: false, // Отключаем полноэкранный режим по двойному клику
   },
+  html5: {
+    vhs: {
+      // Отключаем перезапуск источника при проблемах
+      withCredentials: false,
+      // Устанавливаем настройки для более стабильной работы HLS на медленных сетях
+      overrideNative: true,
+      cacheEncryptionKeys: true,
+      useBandwidthFromLocalStorage: true,
+    },
+  },
 });
 
 player.ready(function () {

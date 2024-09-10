@@ -86,6 +86,11 @@
 .my-video-baner div p {
   margin: 25px 0 10px;
   text-align: center;
+  font-size: 2rem;
+}
+
+.my-video-baner div svg {
+  min-width: 160px;
 }
 
 .vjs-icon-circle:before,
