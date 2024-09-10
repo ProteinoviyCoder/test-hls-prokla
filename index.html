@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./assets/css/video-js/video-js.css" />
+    <link rel="stylesheet" href="./assets/css/video-js/custom-video-js.css" />
+    <link rel="stylesheet" href="./assets/css/fonts.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/adaptiv-1000px.css" />
+
+    <title>HLS video-prokla</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Fira Sans", sans-serif;
+        font-size: 0.8rem;
+      }
+
+      a {
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .top-container {
+        width: 100%;
+        max-width: 870px;
+        padding: 0 10px;
+        margin: 0 auto;
+      }
+      .top-container-full {
+        width: 100%;
+        max-width: 100%;
+      }
+      .container {
+        width: 100%;
+        max-width: 970px;
+        padding: 0 10px;
+        margin: 0 auto;
+      }
+
+      .header_baner {
+        background-color: #f2f2f2;
+        margin-bottom: 30px;
+      }
+      .header_baner img {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 320px;
+        padding: 5px 0;
+      }
+      .header_title {
+        margin-bottom: 30px;
+      }
+      .header_core-title {
+        color: #0d8886;
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: -0.025em;
+        line-height: 1;
+      }
+      .header_semi-title {
+        color: #0d8886;
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-align: center;
+        letter-spacing: -0.025em;
+        line-height: 1.7;
+      }
+
+      .my-video {
+        margin-bottom: 65px;
+      }
+      /* .video-full {
+        height: 100dvh;
+        width: 100%;
+      } */
+      .section_brands {
+        box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.13);
+        margin-bottom: 5px;
+      }
+      .brands {
+        width: 100%;
+      }
+      .brands_title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #0d8886;
+        text-align: center;
+        letter-spacing: 0.1em;
+        margin-bottom: 15px;
+      }
+      .all-brands {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-x: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+
+      @keyframes animBrand {
+        0% {
+          opacity: 0;
+          transform: translateX(70px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .animBrand {
+        animation: animBrand 0.7s ease forwards;
+      }
+      .all-brands div {
+        opacity: 0;
+        transform: translateX(70px);
+        width: 100%;
+        max-width: 100px;
+      }
+      .brand {
+        width: 100%;
+        min-width: 70px;
+      }
+      .brands_notif {
+        text-align: center;
+        color: #5b5b5b;
+        font-size: 0.8rem;
+        padding-bottom: 40px;
+      }
+
+      .section_offers {
+        background-color: rgb(245, 247, 250);
+        padding-top: 40px;
+        padding-bottom: 50px;
+      }
+      .offers_core-title {
+        font-size: 2rem;
+        font-weight: 500;
+        letter-spacing: -0.025rem;
+        color: #0d8886;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+      .offers_semi-title {
+        font-size: 1.3rem;
+        font-weight: 400;
+        letter-spacing: -0.025rem;
+        color: #0d8886;
+        text-align: center;
+        margin-bottom: 45px;
+      }
+      .offers_div-offer-card {
+        display: flex;
+        gap: 14px;
+      }
+
+      .offer-card {
+        border-radius: 10px;
+        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: 0.4s ease;
+      }
+      .offer-card-active {
+        background-color: rgb(255, 253, 241);
+      }
+      @media (hover: hover) {
+        .offer-card:hover {
+          border: 1px solid rgb(160, 160, 160);
+          box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.3);
+          transition: 0.4s ease;
+        }
+      }
+      .offer-card:nth-child(4) {
+        transform: scale(1.1);
+      }
+      .offer-card_header {
+        background-color: #0d8886;
+        color: white;
+        padding: 15px 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+      .offer-card_header p:first-child {
+        font-size: 1.8rem;
+      }
+      .offer-card_header p:last-child {
+        font-size: 1.1rem;
+      }
+
+      .offer-card_main {
+        padding: 0 10px;
+      }
+
+      .offer-card_main-div-img {
+        position: relative;
+      }
+      .offer-card_main-img_best-price {
+        position: absolute;
+        width: 100%;
+        max-width: 80px;
+        left: 0;
+        top: 60%;
+      }
+      .offer-card_main-img_ipad {
+        position: absolute;
+        width: 100%;
+        max-width: 100px;
+        right: 0;
+        top: 55%;
+      }
+      .offer-card_main-img {
+        display: block;
+        width: 100%;
+        max-width: 290px;
+        margin: 0 auto 20px;
+      }
+      .offer-card_main-costs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        font-size: 4.5rem;
+        font-weight: 700;
+      }
+      .price-old {
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(157, 157, 157);
+
+        font-size: 2.5rem;
+        line-height: 0.5;
+      }
+      .price-old p:first-child {
+        font-size: 1.2rem;
+        align-self: flex-start;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .price-old-line {
+        position: absolute;
+        width: 100%;
+        border-top: 4px solid hwb(0 35% 14%);
+        border-radius: 10px;
+        transform: rotate(12deg);
+      }
+      .price-new {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: #0d8886;
+        line-height: 0.5;
+      }
+      .price-new-red {
+        color: rgb(185, 28, 28);
+      }
+      .price-new p:first-child {
+        font-family: Arial, Helvetica, sans-serif;
+        align-self: flex-start;
+        font-size: 2.3rem;
+      }
+      .price-text {
+        font-size: 0.9rem;
+        font-weight: 300;
+        line-height: 1;
+        color: #3a3a3a;
+        transform: translateY(-7px);
+      }
+      .offer-card_main-button {
+        position: relative;
+        background: linear-gradient(180deg, #f6dda1, #f0c14b);
+        width: 100%;
+        max-width: 270px;
+        display: block;
+        margin: 45px auto 15px;
+        padding: 12px 25px;
+        border: 1px solid rgb(88, 88, 88);
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #292929;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .offer-card_main-button-active {
+        background: linear-gradient(180deg, #ffdf28, #ffca11);
+      }
+
+      .offer-card_main-total-price {
+        margin-bottom: 15px;
+      }
+
+      .offer-card_main-total-price,
+      .offer-card_main-text-small,
+      .offer-card_main-text-big {
+        text-align: center;
+        font-size: 1.4rem;
+        color: #646464;
+        font-weight: 500;
+      }
+      .offer-card_main-text-small {
+        font-size: 0.9rem;
+        margin-bottom: 3px;
+      }
+      .offer-card_main-text-big {
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+      }
+      .offer-card_main-img-cards {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 350px;
+      }
+
+      @media (max-width: 1000px) {
+        .all-brands {
+          width: 100%;
+          margin-bottom: 15px;
+          overflow-x: hidden;
+
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+        }
+        .offers_div-offer-card {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+        .offer-card {
+          width: 100%;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+        .offer-card:nth-child(4) {
+          transform: scale(1);
+        }
+        .offers_semi-title {
+          margin-bottom: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header none">
+        <div class="header_baner">
+          <div class="top-container">
+            <img
+              class="header_baner-img"
+              src="./assets/img/header-baner.png"
+              alt="#"
+            />
+          </div>
+        </div>
+        <div class="top-container">
+          <div class="header_title">
+            <h1 class="header_core-title">
+              Discover the Simple&nbsp;<span style="background-color: #fffd34"
+                >‘Joint Jello’</span
+              >&nbsp;Trick
+            </h1>
+            <h2 class="header_semi-title">
+              <em>
+                Helping Seniors in a Remote Japanese Village Enjoy Ageless
+                Joints
+              </em>
+            </h2>
+          </div>
+        </div>
+      </header>
+      <main class="main">
+        <section class="section_video">
+          <div class="top-container top-container-full" id="containerVideo">
+            <div class="my-video video-full">
+              <video
+                id="my-video"
+                class="video-js vjs-big-play-centered"
+                controls
+                preload="auto"
+                data-setup="{}"
+              >
+                <source
+                  src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+                  type="application/x-mpegURL"
+                />
+                <!-- <source src="./AU-beast-runs.mp4" type="video/mp4" /> -->
+                Ваш браузер не поддерживает HTML5 видео.
+              </video>
+              <canvas id="canvas" style="display: none"></canvas>
+            </div>
+          </div>
+        </section>
+        <section class="section_brands">
+          <div class="container">
+            <div class="brands">
+              <p class="brands_title">As Featured On:</p>
+              <div class="all-brands">
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-1.png" alt="#" />
+                </div>
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-2.png" alt="#" />
+                </div>
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-3.png" alt="#" />
+                </div>
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-4.png" alt="#" />
+                </div>
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-5.png" alt="#" />
+                </div>
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-6.png" alt="#" />
+                </div>
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-7.png" alt="#" />
+                </div>
+                <div class="div-brand">
+                  <img class="brand" src="./assets/img/brand-8.png" alt="#" />
+                </div>
+              </div>
+              <p class="brands_notif">
+                BIODYNAMIX® is not endorsed by, sponsored by, or affiliated with
+                any of these organizations.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section class="section_offers">
+          <div class="container">
+            <h3 class="offers_core-title">Special Introductory Offer:</h3>
+            <p class="offers_semi-title"><em>Select Your Savings!</em></p>
+
+            <div class="offers_div-offer-card">
+              <a href="<?=$offerUrl?>">
+                <div class="offer-card">
+                  <div class="offer-card_header">
+                    <p>
+                      <strong style="text-transform: uppercase"
+                        >1 Bottle</strong
+                      >
+                    </p>
+                    <p>
+                      <em
+                        >1-Month Supply&nbsp;<span
+                          style="
+                            background-color: #ffdd04;
+                            color: #0d8886;
+                            border-radius: 100px;
+                            padding: 2px 5px;
+                            white-space: nowrap;
+                          "
+                          >+ 2 Bonuses</span
+                        ></em
+                      >
+                    </p>
+                  </div>
+
+                  <div class="offer-card_main">
+                    <div class="offer-card_main-div-img">
+                      <img
+                        class="offer-card_main-img"
+                        src="./assets/img/prod1.png"
+                        alt="#"
+                      />
+                    </div>
+                    <div class="offer-card_main-costs">
+                      <div class="price-old">
+                        <p>$</p>
+                        <p>59</p>
+                        <div class="price-old-line"></div>
+                      </div>
+                      <div class="price-new">
+                        <p>$</p>
+                        <p>39</p>
+                      </div>
+                      <div class="price-text">
+                        per <br />
+                        bottle
+                      </div>
+                    </div>
+
+                    <a href="<?=$offerUrl?>" style="text-decoration: none">
+                      <button class="offer-card_main-button">
+                        ADD TO CART
+                      </button>
+                    </a>
+
+                    <p class="offer-card_main-total-price">TOTAL: $59</p>
+                    <p class="offer-card_main-text-small">
+                      +$9.95 USA Shipping
+                    </p>
+                    <p class="offer-card_main-text-big">180-Day Guarantee</p>
+                    <img
+                      class="offer-card_main-img-cards"
+                      src="./assets/img/credit-cards.png"
+                      alt="#"
+                    />
+                  </div>
+                </div>
+              </a>
+
+              <a href="<?=$offerUrl?>">
+                <div class="offer-card offer-card-active">
+                  <div class="offer-card_header">
+                    <p>
+                      <strong style="text-transform: uppercase"
+                        >6 Bottles</strong
+                      >
+                    </p>
+                    <p>
+                      <em
+                        >6-Month Supply&nbsp;<span
+                          style="
+                            background-color: #ffdd04;
+                            color: #0d8886;
+                            border-radius: 100px;
+                            padding: 2px 5px;
+                            white-space: nowrap;
+                          "
+                          >+ 2 Bonuses</span
+                        ></em
+                      >
+                    </p>
+                  </div>
+                  <div class="offer-card_main">
+                    <div class="offer-card_main-div-img">
+                      <img
+                        class="offer-card_main-img"
+                        src="./assets/img/prod6.png"
+                        alt="#"
+                      />
+                      <img
+                        class="offer-card_main-img_best-price"
+                        src="./assets/img/best-price.png"
+                        alt="#"
+                      />
+                      <img
+                        class="offer-card_main-img_ipad"
+                        src="./assets/img/ipad.png"
+                        alt="#"
+                      />
+                    </div>
+                    <div class="offer-card_main-costs">
+                      <div class="price-old">
+                        <p>$</p>
+                        <p>59</p>
+                        <div class="price-old-line"></div>
+                      </div>
+                      <div class="price-new price-new-red">
+                        <p>$</p>
+                        <p>39</p>
+                      </div>
+                      <div class="price-text">
+                        per <br />
+                        bottle
+                      </div>
+                    </div>
+
+                    <a href="<?=$offerUrl?>" style="text-decoration: none">
+                      <button class="offer-card_main-button">
+                        ADD TO CART
+                      </button>
+                    </a>
+
+                    <p class="offer-card_main-total-price">TOTAL: $234</p>
+                    <p class="offer-card_main-text-small">+FREE USA Shipping</p>
+                    <p class="offer-card_main-text-big">180-Day Guarantee</p>
+                    <img
+                      class="offer-card_main-img-cards"
+                      src="./assets/img/credit-cards.png"
+                      alt="#"
+                    />
+                  </div>
+                </div>
+              </a>
+              <a href="<?=$offerUrl?>">
+                <div class="offer-card">
+                  <div class="offer-card_header">
+                    <p>
+                      <strong style="text-transform: uppercase"
+                        >1 Bottle</strong
+                      >
+                    </p>
+                    <p>
+                      <em
+                        >1-Month Supply&nbsp;<span
+                          style="
+                            background-color: #ffdd04;
+                            color: #0d8886;
+                            border-radius: 100px;
+                            padding: 2px 5px;
+                            white-space: nowrap;
+                          "
+                          >+ 2 Bonuses</span
+                        ></em
+                      >
+                    </p>
+                  </div>
+                  <div class="offer-card_main">
+                    <div class="offer-card_main-div-img">
+                      <img
+                        class="offer-card_main-img"
+                        src="./assets/img/prod1.png"
+                        alt="#"
+                      />
+                      <img
+                        class="offer-card_main-img_ipad"
+                        src="./assets/img/ipad.png"
+                        alt="#"
+                      />
+                    </div>
+                    <div class="offer-card_main-costs">
+                      <div class="price-old">
+                        <p>$</p>
+                        <p>59</p>
+                        <div class="price-old-line"></div>
+                      </div>
+                      <div class="price-new">
+                        <p>$</p>
+                        <p>39</p>
+                      </div>
+                      <div class="price-text">
+                        per <br />
+                        bottle
+                      </div>
+                    </div>
+
+                    <a href="<?=$offerUrl?>" style="text-decoration: none">
+                      <button class="offer-card_main-button">
+                        ADD TO CART
+                      </button>
+                    </a>
+
+                    <p class="offer-card_main-total-price">TOTAL: $59</p>
+                    <p class="offer-card_main-text-small">
+                      +$9.95 USA Shipping
+                    </p>
+                    <p class="offer-card_main-text-big">180-Day Guarantee</p>
+                    <img
+                      class="offer-card_main-img-cards"
+                      src="./assets/img/credit-cards.png"
+                      alt="#"
+                    />
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+
+    <script src="./assets/js/video-js/video-js.min.js"></script>
+    <script src="./assets/js/video-js/custom-video-js.js"></script>
+
+    <script>
+      const brands = document.querySelectorAll(".div-brand");
+      let countTime = 120;
+      brands.forEach((brand) => {
+        setTimeout(() => {
+          brand.classList.add("animBrand");
+        }, countTime);
+        countTime = countTime + 120;
+      });
+    </script>
+
+    <script>
+      const offerCards = document.querySelectorAll(".offer-card");
+      offerCards.forEach((offerCard) => {
+        offerCard.addEventListener("mouseover", function () {
+          offerCards.forEach((card) => {
+            card.classList.remove("offer-card-active");
+
+            const btnOfferCard = card.querySelector(".offer-card_main-button");
+            btnOfferCard.classList.remove("offer-card_main-button-active");
+          });
+
+          offerCard.classList.add("offer-card-active");
+
+          const btnOfferCard = offerCard.querySelector(
+            ".offer-card_main-button"
+          );
+          btnOfferCard.classList.add("offer-card_main-button-active");
+
+          offerCard.addEventListener("mouseleave", function () {
+            offerCard.classList.remove("offer-card-active");
+
+            const btnOfferCard = offerCard.querySelector(
+              ".offer-card_main-button"
+            );
+            btnOfferCard.classList.remove("offer-card_main-button-active");
+
+            offerCards[1].classList.add("offer-card-active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+.my-video {
+  width: 100%;
+  height: 470px;
+  border-radius: 3px;
+  box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 700px) {
+  .my-video {
+    width: 100%;
+    height: 370px;
+  }
+}
+.video-js {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+}
+/* Настройки для управления */
+.vjs-control-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(12, 137, 135, 0.75) !important;
+  padding: 16px 0 !important;
+}
+
+/* Скрыть все элементы управления */
+.vjs-time-control,
+.vjs-subs-caps-button,
+.vjs-audio-button,
+.vjs-play-control {
+  display: none !important;
+}
+
+/* Показать только прогресс бар */
+.vjs-progress-control {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+/* Центрировать кнопку воспроизведения */
+.vjs-play-control {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Скрыть временные метки */
+.vjs-current-time,
+.vjs-duration {
+  display: none; /* Скрыть текущее время и длительность */
+}
+
+/* Кнопка перемотки */
+.vjs-rewind-button {
+  margin-right: 1px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.my-video-baner {
+  position: absolute;
+  font-size: 2.3rem;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  pointer-events: none;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.my-video-baner div {
+  height: 70%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(12, 137, 135, 0.75);
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 15px;
+}
+.my-video-baner div p {
+  margin: 25px 0 10px;
+  text-align: center;
+}
+
+.vjs-icon-circle:before,
+.vjs-seek-to-live-control .vjs-icon-placeholder:before,
+.video-js .vjs-volume-level:before,
+.video-js .vjs-play-progress:before {
+  content: "";
+}
+.vjs-progress-holder,
+.vjs-load-progress,
+.vjs-mouse-display,
+.vjs-play-progress,
+.vjs-progress-control {
+  cursor: default !important;
+  pointer-events: none;
+}
+.vjs-progress-holder {
+  height: 0.5rem !important;
+  border-radius: 5px;
+  background-color: rgba(170, 180, 191, 0.5) !important;
+}
+.video-js .vjs-progress-holder .vjs-play-progress,
+.video-js .vjs-progress-holder .vjs-load-progress,
+.video-js .vjs-progress-holder .vjs-load-progress div {
+  border-radius: 5px !important;
+}
+.video-js .vjs-load-progress {
+  background-color: rgba(170, 180, 191, 0.5) !important;
+}
+.vjs-big-play-button {
+  background-color: rgba(12, 137, 135, 0.75) !important;
+  border-radius: 300px !important;
+  border: none !important;
+  height: 2.5em !important;
+  width: 2.5em !important;
+}
+.vjs-big-play-centered .vjs-big-play-button {
+  margin-top: -1em !important;
+}
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+  top: 18%;
+}
+
+.none {
+  display: none !important;
+}
