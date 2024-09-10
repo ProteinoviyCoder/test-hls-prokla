@@ -61,7 +61,10 @@ player.ready(function () {
 
   // Тут вешаем на видео обработчик события по клику и описываем нужную логику
   const videoElement = document.getElementById("my-video");
-  videoElement.addEventListener("click", function () {
+  videoElement.addEventListener("click", handleVideoClick);
+  videoElement.addEventListener("touchstart", handleVideoClick);
+
+  function handleVideoClick() {
     if (myVideoBaner.classList.contains("none")) {
       if (player.paused()) {
         player.pause();
@@ -86,6 +89,6 @@ player.ready(function () {
       player.muted(false);
       player.play();
     }
-  });
+  }
   // ------------------------------------------------------------------------------------------
 });
