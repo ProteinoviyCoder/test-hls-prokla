@@ -2,16 +2,12 @@ const player = videojs("my-video", {
   userActions: {
     doubleClick: false, // Отключаем полноэкранный режим по двойному клику
   },
-  html5: {
-    vhs: {
-      // Отключаем перезапуск источника при проблемах
-      withCredentials: false,
-      // Устанавливаем настройки для более стабильной работы HLS на медленных сетях
-      overrideNative: true,
-      cacheEncryptionKeys: true,
-      useBandwidthFromLocalStorage: true,
-    },
-  },
+});
+
+// Задайте источник видео
+player.src({
+  src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", // Замените на ваш URL
+  type: "application/x-mpegURL",
 });
 
 player.ready(function () {
@@ -60,11 +56,12 @@ player.ready(function () {
   // ------------------------------------------------------------------------------------------
 
   // Тут вешаем на видео обработчик события по клику и описываем нужную логику
-  const videoElement = document.getElementById("my-video");
-  videoElement.addEventListener("click", handleVideoClick);
-  videoElement.addEventListener("touchstart", handleVideoClick);
-
-  function handleVideoClick() {
+  const videoElement = document.querySelector(".my-video");
+  videoElement.addEventListener("dblclick", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+  videoElement.addEventListener("click", function (e) {
     if (myVideoBaner.classList.contains("none")) {
       if (player.paused()) {
         player.pause();
@@ -89,6 +86,33 @@ player.ready(function () {
       player.muted(false);
       player.play();
     }
-  }
+  });
+  videoElement.addEventListener("touchend", function () {
+    if (myVideoBaner.classList.contains("none")) {
+      if (!player.paused()) {
+        player.pause();
+        // Показать большую кнопку воспроизведения
+        containerVideo.classList.remove("top-container-full");
+        divVideo.classList.remove("video-full");
+        header.classList.remove("none");
+        bigBtnPaues.style.display = "block";
+        controlBar.style.display = "none";
+        player.muted(false);
+      } else {
+        player.play();
+        // Скрыть большую кнопку воспроизведения
+        containerVideo.classList.add("top-container-full");
+        divVideo.classList.add("video-full");
+        header.classList.add("none");
+        bigBtnPaues.style.display = "none";
+        controlBar.style.display = "flex";
+      }
+    } else {
+      myVideoBaner.classList.add("none");
+      player.muted(false);
+      player.play();
+    }
+  });
+
   // ------------------------------------------------------------------------------------------
 });
