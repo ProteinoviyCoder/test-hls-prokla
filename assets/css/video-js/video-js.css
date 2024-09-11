@@ -566,8 +566,7 @@ body.vjs-full-window {
 .vjs-big-play-centered .vjs-big-play-button {
   top: 50%;
   left: 50%;
-  margin-top: -0.81666em;
-  margin-left: -1.5em;
+  transform: translateX(-50%) translateY(-10%);
 }
 
 .video-js:hover .vjs-big-play-button,

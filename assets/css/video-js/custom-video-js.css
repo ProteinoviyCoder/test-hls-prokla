@@ -28,7 +28,10 @@
 .vjs-time-control,
 .vjs-subs-caps-button,
 .vjs-audio-button,
-.vjs-play-control {
+.vjs-play-control,
+.vjs-picture-in-picture-control,
+.vjs-volume-panel,
+.vjs-fullscreen-control {
   display: none !important;
 }
 
